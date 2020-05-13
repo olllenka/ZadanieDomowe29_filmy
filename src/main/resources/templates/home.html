@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="m-5">
+    <h1 th:text="${mode == 'edit' ? 'Edycja filmu' : 'Dodawanie nowego filmu'}"></h1>
+    <form method="post" th:action = "${mode == 'edit' ? '/edit' : '/'}" th:object="${movie}">
+        <div class="form-group">
+            <label for="movieTitle">Tytuł</label>
+            <input type="text" class="form-control" id="movieTitle" th:field="*{title}">
+        </div>
+        <div class="form-group">
+            <label for="premiereDate">Data premiery</label>
+            <input type="date" class="form-control" id="premiereDate" th:field="*{premiereDate}">
+        </div>
+        <div class="form-group">
+            <label for="movieDescription">Opis</label>
+            <input type="text" class="form-control" id="movieDescription" th:field="*{description}">
+        </div>
+        <div class="form-group">
+            <label for="movieCategory">Kategoria</label>
+            <select required id="movieCategory" class="form-control" th:field="*{category}">
+                <option selected value="">Wybierz...</option>
+                <option th:value="COMEDY">Komedia</option>
+                <option th:value="HORROR">Horror</option>
+                <option th:value="THRILLER">Thriller</option>
+                <option th:value="DRAMA">Dramat</option>
+                <option th:value="ROMANCE">Romans</option>
+            </select>
+        </div>
+        <div th:if="${mode == 'edit'}" class="form-group">
+            <label for="transactionId">ID</label>
+            <input readonly type="number" class="form-control" id="transactionId" th:field="*{id}">
+        </div>
+        <button type="submit" class="btn btn-primary" th:text="${mode == 'edit' ? 'Edytuj' : 'Dodaj'}"></button>
+    </form>
+</div>
+</body>
+</html>

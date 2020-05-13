@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies list</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="m-5">
+    <h1>Lista filmów</h1><br/>
+
+    Wyświetl gatunki:
+    <a th:href="@{'/moviesList'}" th:text="|All|"></a>
+    <a th:each="movieCategory: ${movieCategories}" th:href="@{'/moviesList?category=' + ${movieCategory}}" th:text="|${movieCategory} |"></a>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:each="movie: ${movies}">
+            <a th:href="@{'movie?id=' + ${movie.id}}">
+                <div th:text="|${movie.title}, gatunek:  ${movie.category}|"></div>
+            </a>
+        </li>
+    </ul>
+    <br/><br/>
+    <a th:href="@{/}" th:text="|Dodaj film|"></a>
+</div>
+</body>
+</html>
